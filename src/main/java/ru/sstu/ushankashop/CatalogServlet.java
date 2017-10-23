@@ -20,9 +20,7 @@ public class CatalogServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(ItemList.class);
-            Marshaller marshaller = jaxbContext.createMarshaller();
-            marshaller.marshal(new ItemList(ITEMS), resp.getOutputStream());
+            return;
         }catch (Exception e){
             throw new RuntimeException(e);
         }
