@@ -30,6 +30,7 @@ public class CatalogServlet extends HttpServlet {
     //todo
     @Override
     public void init(ServletConfig config) throws ServletException {
+        System.out.println("Servlet init");
         super.init(config);
     }
 }
