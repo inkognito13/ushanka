@@ -5,13 +5,17 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
- <servlet>
-   <servlet-name>catalog</servlet-name>
-   <servlet-class>ru.sstu.ushankashop.CatalogServlet</servlet-class>
- </servlet>
+    <servlet>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:servlet-context.xml</param-value>
+        </init-param>
+    </servlet>
 
     <servlet-mapping>
-        <servlet-name>catalog</servlet-name>
-        <url-pattern>/catalog</url-pattern>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>
