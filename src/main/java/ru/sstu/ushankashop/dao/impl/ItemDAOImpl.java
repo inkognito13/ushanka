@@ -1,7 +1,8 @@
-package ru.sstu.ushankashop;
+package ru.sstu.ushankashop.dao.impl;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import ru.sstu.ushankashop.dto.Item;
+import ru.sstu.ushankashop.dao.ItemDAO;
 
 import java.util.Arrays;
 import java.util.List;

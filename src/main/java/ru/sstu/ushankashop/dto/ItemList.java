@@ -1,4 +1,4 @@
-package ru.sstu.ushankashop;
+package ru.sstu.ushankashop.dto;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

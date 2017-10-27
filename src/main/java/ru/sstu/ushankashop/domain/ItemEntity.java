@@ -1,14 +1,13 @@
-package ru.sstu.ushankashop;
+package ru.sstu.ushankashop.domain;
 
-public class Item {
+
+public class ItemEntity {
     private Long id;
     private String name;
     private String description;
     private Double price;
     private Integer count;
-
-    public Item() {
-    }
+    private String manufacturer;
 
     public Long getId() {
         return id;
@@ -50,11 +49,11 @@ public class Item {
         this.count = count;
     }
 
-    public Item(Long id, String name, String description, Double price, Integer count) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.count = count;
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 }
