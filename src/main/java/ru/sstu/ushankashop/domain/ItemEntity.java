@@ -6,8 +6,17 @@ public class ItemEntity {
     private String name;
     private String description;
     private Double price;
-    private Integer count;
+    private Integer stock;
     private String manufacturer;
+
+    public ItemEntity(Long id, String name, String description, Double price, Integer stock, String manufacturer) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.manufacturer = manufacturer;
+    }
 
     public Long getId() {
         return id;
@@ -41,12 +50,12 @@ public class ItemEntity {
         this.price = price;
     }
 
-    public Integer getCount() {
-        return count;
+    public Integer getStock() {
+        return stock;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     public String getManufacturer() {

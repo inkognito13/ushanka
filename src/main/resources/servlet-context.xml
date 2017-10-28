@@ -11,4 +11,10 @@
 
     <mvc:annotation-driven/>
     <context:component-scan base-package="ru.sstu.ushankashop"/>
+    <bean class="com.zaxxer.hikari.HikariDataSource" id="dataSource">
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ushanka"/>
+        <property name="username" value="ushanka_owner"/>
+        <property name="password" value="very_secret_password"/>
+        <property name="dataSourceProperties" value="useSSL=false"/>
+    </bean>
 </beans>

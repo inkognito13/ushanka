@@ -16,7 +16,7 @@ public class Item {
         this.id = entity.getId();
         this.name = entity.getName();
         this.description = entity.getDescription();
-        this.count = entity.getCount();
+        this.count = entity.getStock();
         this.price = entity.getPrice().toString();
     }
 

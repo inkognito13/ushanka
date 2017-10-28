@@ -7,14 +7,14 @@ import java.util.List;
 
 public class OrderService {
     public Order placeOrder(Long shippingId, Long paymentId){
-
+        return null;
     }
 
     public List<Order> getAllOrders(){
-
+        return null;
     }
 
     public Order getOrderDetails(Long orderId){
-
+        return null;
     }
 }
