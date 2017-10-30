@@ -24,10 +24,9 @@ CREATE TABLE PAYMENT_INFO (
   phone_number  VARCHAR(20)  NOT NULL,
   first_string  VARCHAR(100) NOT NULL,
   second_string VARCHAR(100),
-  city          VARCHAR(50),
-  user_id       BIGINT,
-  FOREIGN KEY (user_id)
-  REFERENCES USER (id),
+  city          VARCHAR(50) NOT NULL,
+  user_id       BIGINT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES USER (id),
   INDEX (id)
 );
 
@@ -39,15 +38,15 @@ CREATE TABLE SHIPPING_INFO (
   postal_code   VARCHAR(15),
   first_string  VARCHAR(100) NOT NULL,
   second_string VARCHAR(100),
-  city          VARCHAR(50),
-  user_id       BIGINT,
+  city          VARCHAR(50) NOT NULL,
+  user_id       BIGINT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES USER (id),
   INDEX (id)
 );
 
 CREATE TABLE CART (
   id      BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user_id BIGINT,
+  user_id BIGINT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES USER (id),
   INDEX (id)
 );
@@ -60,13 +59,13 @@ CREATE TABLE ITEM_TO_CART (
   FOREIGN KEY (item_id) REFERENCES ITEM (id)
 );
 
-CREATE TABLE ORDER (
+CREATE TABLE ORDER_ (
   id               BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   total            FLOAT  NOT NULL,
   date             DATETIME,
-  user_id          BIGINT,
-  payment_info_id  BIGINT,
-  shipping_info_id BIGINT,
+  user_id          BIGINT NOT NULL,
+  payment_info_id  BIGINT NOT NULL,
+  shipping_info_id BIGINT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES USER (id),
   FOREIGN KEY (payment_info_id) REFERENCES PAYMENT_INFO (id),
   FOREIGN KEY (shipping_info_id) REFERENCES SHIPPING_INFO (id),
