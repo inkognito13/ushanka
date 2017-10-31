@@ -7,7 +7,7 @@ public class Item {
     private String name;
     private String description;
     private String price;
-    private Integer count;
+    private Integer stock;
 
     public Item() {
     }
@@ -16,7 +16,7 @@ public class Item {
         this.id = entity.getId();
         this.name = entity.getName();
         this.description = entity.getDescription();
-        this.count = entity.getStock();
+        this.stock = entity.getStock();
         this.price = entity.getPrice().toString();
     }
 
@@ -52,19 +52,19 @@ public class Item {
         this.price = price;
     }
 
-    public Integer getCount() {
-        return count;
+    public Integer getStock() {
+        return stock;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
-    public Item(Long id, String name, String description, Double price, Integer count) {
+    public Item(Long id, String name, String description, Double price, Integer stock) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price.toString();
-        this.count = count;
+        this.stock = stock;
     }
 }
