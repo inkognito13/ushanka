@@ -6,6 +6,9 @@ import ru.sstu.ushankashop.domain.ItemEntity;
 import ru.sstu.ushankashop.dto.Item;
 import ru.sstu.ushankashop.dao.ItemDAO;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +23,9 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Autowired
     DataSource dataSource;
+    
+    @Autowired
+    EntityManagerFactory entityManagerFactory;
 
     public DataSource getDataSource() {
         return dataSource;
@@ -30,30 +36,21 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     public List<ItemEntity> getAllItems() {
-        Connection connection = null;
-        List<ItemEntity> result = new ArrayList<ItemEntity>();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+
+        List<ItemEntity> result = null;
         try {
-            connection = getDataSource().getConnection();
-            ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM ITEM");
-            while (rs.next()) {
-                result.add(new ItemEntity(
-                        rs.getLong("id"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getDouble("price"),
-                        rs.getInt("stock"),
-                        rs.getString("manufacturer")
-                ));
-            }
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            result = entityManager.createQuery("select i from ItemEntity i", ItemEntity.class).getResultList();
         } catch (Exception e) {
-            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            if (transaction != null) {
+                transaction.commit();
             }
         }
         return result;
@@ -72,7 +69,7 @@ public class ItemDAOImpl implements ItemDAO {
                         rs.getLong("id"),
                         rs.getString("name"),
                         rs.getString("description"),
-                        rs.getDouble("price"),
+                        rs.getFloat("price"),
                         rs.getInt("stock"),
                         rs.getString("manufacturer")
                 );
