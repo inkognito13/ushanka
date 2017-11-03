@@ -29,4 +29,36 @@ public class User {
         entity.setPassword(this.password);
         return entity;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public ShippingInfoEntity getShippingInfoEntity() {
+        return shippingInfoEntity;
+    }
+
+    public void setShippingInfoEntity(ShippingInfoEntity shippingInfoEntity) {
+        this.shippingInfoEntity = shippingInfoEntity;
+    }
+
+    public PaymentInfoEntity getPaymentInfoEntity() {
+        return paymentInfoEntity;
+    }
+
+    public void setPaymentInfoEntity(PaymentInfoEntity paymentInfoEntity) {
+        this.paymentInfoEntity = paymentInfoEntity;
+    }
 }

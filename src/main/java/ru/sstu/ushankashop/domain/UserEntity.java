@@ -13,6 +13,12 @@ public class UserEntity {
     private String email;
     @Column(name = "password")
     private String password;
+    @OneToMany(mappedBy = "user")
+    private List<ShippingInfoEntity> shippingInfo;
+    @OneToMany(mappedBy = "user")
+    private List<PaymentInfoEntity> paymentInfo;
+    @OneToMany(mappedBy = "user")
+    private List<OrderEntity> orders;
 
     public UserEntity() {
     }
@@ -39,5 +45,29 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<ShippingInfoEntity> getShippingInfo() {
+        return shippingInfo;
+    }
+
+    public void setShippingInfo(List<ShippingInfoEntity> shippingInfo) {
+        this.shippingInfo = shippingInfo;
+    }
+
+    public List<PaymentInfoEntity> getPaymentInfo() {
+        return paymentInfo;
+    }
+
+    public void setPaymentInfo(List<PaymentInfoEntity> paymentInfo) {
+        this.paymentInfo = paymentInfo;
+    }
+
+    public List<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderEntity> orders) {
+        this.orders = orders;
     }
 }
