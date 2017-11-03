@@ -13,9 +13,13 @@ public class UserDAOImpl implements UserDAO{
 
     @Autowired
     EntityManager entityManager;
-
-    @Transactional
+    
     public UserEntity create(UserEntity user) {
         return entityManager.merge(user);
+    }
+    
+    
+    public UserEntity findById(Long id){
+        return entityManager.find(UserEntity.class,id);
     }
 }

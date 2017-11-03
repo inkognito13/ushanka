@@ -4,30 +4,48 @@ import ru.sstu.ushankashop.domain.PaymentInfoEntity;
 import ru.sstu.ushankashop.domain.ShippingInfoEntity;
 import ru.sstu.ushankashop.domain.UserEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Dmitry Tarasov
  * Date: 10/28/2017
  * Time: 18:37
  */
 public class User {
+    private Long id;
     private String email;
     private String password;
-    private ShippingInfoEntity shippingInfoEntity;
-    private PaymentInfoEntity paymentInfoEntity;
+    private List<ShippingInfo> shippingInfo;
+    private List<PaymentInfo> paymentInfo;
 
     public User(UserEntity entity) {
+        this.id = entity.getId();
         this.email = entity.getEmail();
         this.password = entity.getPassword();
+        if (entity.getShippingInfo() != null) {
+            for (ShippingInfoEntity shippingInfoEntity : entity.getShippingInfo()) {
+                getShippingInfo().add(new ShippingInfo(shippingInfoEntity));
+            }
+        }
     }
 
     public User() {
     }
 
-    public UserEntity toEntity(){
+    public UserEntity toEntity() {
         UserEntity entity = new UserEntity();
         entity.setEmail(this.email);
         entity.setPassword(this.password);
         return entity;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -46,19 +64,25 @@ public class User {
         this.password = password;
     }
 
-    public ShippingInfoEntity getShippingInfoEntity() {
-        return shippingInfoEntity;
+    public List<ShippingInfo> getShippingInfo() {
+        if (shippingInfo == null) {
+            this.shippingInfo = new ArrayList<ShippingInfo>();
+        }
+        return shippingInfo;
     }
 
-    public void setShippingInfoEntity(ShippingInfoEntity shippingInfoEntity) {
-        this.shippingInfoEntity = shippingInfoEntity;
+    public void setShippingInfo(List<ShippingInfo> shippingInfo) {
+        this.shippingInfo = shippingInfo;
     }
 
-    public PaymentInfoEntity getPaymentInfoEntity() {
-        return paymentInfoEntity;
+    public List<PaymentInfo> getPaymentInfo() {
+        if (paymentInfo == null) {
+            setPaymentInfo(new ArrayList<PaymentInfo>());
+        }
+        return paymentInfo;
     }
 
-    public void setPaymentInfoEntity(PaymentInfoEntity paymentInfoEntity) {
-        this.paymentInfoEntity = paymentInfoEntity;
+    public void setPaymentInfo(List<PaymentInfo> paymentInfo) {
+        this.paymentInfo = paymentInfo;
     }
 }

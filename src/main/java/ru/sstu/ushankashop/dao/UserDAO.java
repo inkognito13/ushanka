@@ -4,4 +4,5 @@ import ru.sstu.ushankashop.domain.UserEntity;
 
 public interface UserDAO {
     UserEntity create(UserEntity user);
+    UserEntity findById(Long id);
 }
