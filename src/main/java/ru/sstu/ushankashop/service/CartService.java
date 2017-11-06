@@ -52,9 +52,21 @@ public class CartService {
         
         return new Cart(cartDAO.merge(cart));
     }
-
-    public Cart remove(Long itemId) {
-        return null;
+    
+    @Transactional
+    public Cart removeItemFromCart(Long itemId) {
+        UserEntity userEntity = userDAO.findById(1L);
+        CartEntity cart = userEntity.getCart();
+        CommerceItemEntity toDelete = null;
+        for (CommerceItemEntity commerceItemEntity:cart.getItems()){
+            if (commerceItemEntity.getItem().getId().equals(itemId)){
+                toDelete = commerceItemEntity;
+            }
+        }
+        if (toDelete!=null){
+            cart.getItems().remove(toDelete);
+        }
+        return new Cart(cartDAO.merge(cart));
     }
 
     public Cart update(Long itemId, Integer quantity) {

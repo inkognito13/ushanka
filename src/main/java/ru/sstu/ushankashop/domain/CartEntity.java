@@ -22,7 +22,7 @@ public class CartEntity {
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommerceItemEntity> items;
 
     public CartEntity() {

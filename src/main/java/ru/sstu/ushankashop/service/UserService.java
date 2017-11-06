@@ -17,9 +17,6 @@ public class UserService {
     @Autowired
     UserDAO userDAO;
     
-    @Autowired
-    ShippingInfoDAO shippingInfoDAO;
-    
     @Transactional
     public User create(User user){
         return new User(userDAO.merge(user.toEntity()));
@@ -30,7 +27,8 @@ public class UserService {
         UserEntity userEntity = userDAO.findById(1L);
         ShippingInfoEntity shippingInfoEntity = shippingInfo.toEntity();
         shippingInfoEntity.setUser(userEntity);
-        shippingInfoDAO.create(shippingInfoEntity);
-        return new User(userEntity);
+        userEntity.getShippingInfo().add(shippingInfoEntity);
+//        shippingInfoDAO.create(shippingInfoEntity);
+        return new User(userDAO.merge(userEntity));
     }
 }

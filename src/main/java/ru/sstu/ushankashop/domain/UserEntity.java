@@ -14,7 +14,7 @@ public class UserEntity {
     private String email;
     @Column(name = "password")
     private String password;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ShippingInfoEntity> shippingInfo;
     @OneToMany(mappedBy = "user")
     private List<PaymentInfoEntity> paymentInfo;
