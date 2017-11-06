@@ -14,7 +14,7 @@ public class UserDAOImpl implements UserDAO{
     @Autowired
     EntityManager entityManager;
     
-    public UserEntity create(UserEntity user) {
+    public UserEntity merge(UserEntity user) {
         return entityManager.merge(user);
     }
     

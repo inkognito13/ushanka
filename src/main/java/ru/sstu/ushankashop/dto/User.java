@@ -23,10 +23,8 @@ public class User {
         this.id = entity.getId();
         this.email = entity.getEmail();
         this.password = entity.getPassword();
-        if (entity.getShippingInfo() != null) {
-            for (ShippingInfoEntity shippingInfoEntity : entity.getShippingInfo()) {
-                getShippingInfo().add(new ShippingInfo(shippingInfoEntity));
-            }
+        for (ShippingInfoEntity shippingInfoEntity : entity.getShippingInfo()) {
+            getShippingInfo().add(new ShippingInfo(shippingInfoEntity));
         }
     }
 

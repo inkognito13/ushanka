@@ -1,6 +1,7 @@
 package ru.sstu.ushankashop.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,8 @@ public class UserEntity {
     private List<PaymentInfoEntity> paymentInfo;
     @OneToMany(mappedBy = "user")
     private List<OrderEntity> orders;
+    @OneToOne(mappedBy = "user")
+    private CartEntity cart;
 
     public UserEntity() {
     }
@@ -48,6 +51,9 @@ public class UserEntity {
     }
 
     public List<ShippingInfoEntity> getShippingInfo() {
+        if (this.shippingInfo == null) {
+            this.shippingInfo = new ArrayList<ShippingInfoEntity>();
+        }
         return shippingInfo;
     }
 
@@ -69,5 +75,13 @@ public class UserEntity {
 
     public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
+    }
+
+    public CartEntity getCart() {
+        return cart;
+    }
+
+    public void setCart(CartEntity cart) {
+        this.cart = cart;
     }
 }

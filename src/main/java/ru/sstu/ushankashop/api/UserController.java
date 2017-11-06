@@ -23,8 +23,8 @@ public class UserController {
         return userService.create(user);
     }
     
-    @RequestMapping(value = "{userId}/shippingInfo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public User addShippingInfo(@PathVariable Long userId, @RequestBody ShippingInfo shippingInfo){
-        return userService.addShippingInfoToUser(shippingInfo, userId);
+    @RequestMapping(value = "shippingInfo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public User addShippingInfo(@RequestBody ShippingInfo shippingInfo){
+        return userService.addShippingInfoToUser(shippingInfo);
     }
 }

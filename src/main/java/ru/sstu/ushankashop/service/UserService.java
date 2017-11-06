@@ -22,12 +22,12 @@ public class UserService {
     
     @Transactional
     public User create(User user){
-        return new User(userDAO.create(user.toEntity()));
+        return new User(userDAO.merge(user.toEntity()));
     }
     
     @Transactional
-    public User addShippingInfoToUser(ShippingInfo shippingInfo, Long userId){
-        UserEntity userEntity = userDAO.findById(userId);
+    public User addShippingInfoToUser(ShippingInfo shippingInfo){
+        UserEntity userEntity = userDAO.findById(1L);
         ShippingInfoEntity shippingInfoEntity = shippingInfo.toEntity();
         shippingInfoEntity.setUser(userEntity);
         shippingInfoDAO.create(shippingInfoEntity);
