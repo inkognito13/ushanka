@@ -5,4 +5,5 @@ import ru.sstu.ushankashop.domain.UserEntity;
 public interface UserDAO {
     UserEntity merge(UserEntity user);
     UserEntity findById(Long id);
+    UserEntity findByEmail(String email);
 }

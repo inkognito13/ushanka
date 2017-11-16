@@ -25,10 +25,10 @@
         </property>
     </bean>
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan" value="ru.sstu.ushankashop" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="ru.sstu.ushankashop"/>
         <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
         <property name="jpaProperties">
             <props>
@@ -45,4 +45,15 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+    <security:http use-expressions="true" auto-config="true" create-session="never">
+        <security:intercept-url pattern="/catalog" access="permitAll()"/>
+        <security:intercept-url pattern="/user" method="POST" access="permitAll()"/>
+        <security:intercept-url pattern="/admin" access="hasAuthority('ADMIN')"/>
+        <security:intercept-url pattern="/**" access="hasAnyAuthority('USER', 'ADMIN')"/>
+        <security:http-basic/>
+        <security:csrf disabled="true"/>
+    </security:http>
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="customUserDetailsService"/>
+    </security:authentication-manager>
 </beans>

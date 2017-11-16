@@ -1,11 +1,16 @@
 package ru.sstu.ushankashop.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "USER")
+@NamedQueries(
+        @NamedQuery(name = "selectUserByEmail", query = "from UserEntity u where u.email=:email")
+)
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +27,13 @@ public class UserEntity {
     private List<OrderEntity> orders;
     @OneToOne(mappedBy = "user")
     private CartEntity cart;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "USER_ROLE",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<RoleEntity> roles;
+
 
     public UserEntity() {
     }
@@ -75,6 +87,17 @@ public class UserEntity {
 
     public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
+    }
+
+    public Set<RoleEntity> getRoles() {
+        if (roles == null) {
+            roles = new HashSet<RoleEntity>();
+        }
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
     }
 
     public CartEntity getCart() {
