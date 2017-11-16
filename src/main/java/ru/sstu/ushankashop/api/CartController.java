@@ -24,9 +24,14 @@ public class CartController {
     public Cart addItemToCart(@RequestParam("itemId") Long itemId, @RequestParam("quantity") Integer quantity) {
         return cartService.addItemToCart(itemId, quantity);
     }
-    
+
     @RequestMapping(method = RequestMethod.DELETE)
-    public Cart removeItemFromCart(@RequestParam("itemId") Long itemId){
+    public Cart removeItemFromCart(@RequestParam("itemId") Long itemId) {
         return cartService.removeItemFromCart(itemId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public Cart getCart() {
+        return cartService.getCart();
     }
 }

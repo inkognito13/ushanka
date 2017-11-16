@@ -68,6 +68,12 @@ public class CartService {
         }
         return new Cart(cartDAO.merge(cart));
     }
+    
+    @Transactional
+    public Cart getCart() {
+        UserEntity userEntity = userDAO.findById(1L);
+        return new Cart(userEntity.getCart());
+    }
 
     public Cart update(Long itemId, Integer quantity) {
         return null;
