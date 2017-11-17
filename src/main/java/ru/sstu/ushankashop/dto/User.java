@@ -1,5 +1,6 @@
 package ru.sstu.ushankashop.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import ru.sstu.ushankashop.domain.PaymentInfoEntity;
 import ru.sstu.ushankashop.domain.ShippingInfoEntity;
 import ru.sstu.ushankashop.domain.UserEntity;
@@ -12,6 +13,7 @@ import java.util.List;
  * Date: 10/28/2017
  * Time: 18:37
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
     private Long id;
     private String email;
@@ -22,7 +24,6 @@ public class User {
     public User(UserEntity entity) {
         this.id = entity.getId();
         this.email = entity.getEmail();
-        this.password = entity.getPassword();
         for (ShippingInfoEntity shippingInfoEntity : entity.getShippingInfo()) {
             getShippingInfo().add(new ShippingInfo(shippingInfoEntity));
         }

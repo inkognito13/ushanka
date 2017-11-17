@@ -45,6 +45,7 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
     <security:http use-expressions="true" auto-config="true" create-session="never">
         <security:intercept-url pattern="/catalog" access="permitAll()"/>
         <security:intercept-url pattern="/user" method="POST" access="permitAll()"/>
@@ -54,6 +55,8 @@
         <security:csrf disabled="true"/>
     </security:http>
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="customUserDetailsService"/>
+        <security:authentication-provider user-service-ref="customUserDetailsService">
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
     </security:authentication-manager>
 </beans>
