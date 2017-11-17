@@ -27,7 +27,7 @@ public class UserController {
     
     @RequestMapping(value = "shippingInfo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public User addShippingInfo(@RequestBody ShippingInfo shippingInfo) {
-        return userService.addShippingInfoToUser(shippingInfo);
+        return userService.addShippingInfoToUser(getPrincipal(), shippingInfo);
     }
 
     @RequestMapping(method = RequestMethod.GET)

@@ -3,7 +3,6 @@ package ru.sstu.ushankashop.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.sstu.ushankashop.dao.RoleDAO;
-import ru.sstu.ushankashop.dao.ShippingInfoDAO;
 import ru.sstu.ushankashop.dao.UserDAO;
 import ru.sstu.ushankashop.domain.ShippingInfoEntity;
 import ru.sstu.ushankashop.domain.UserEntity;
@@ -29,12 +28,11 @@ public class UserService {
     }
     
     @Transactional
-    public User addShippingInfoToUser(ShippingInfo shippingInfo){
-        UserEntity userEntity = userDAO.findById(1L);
+    public User addShippingInfoToUser(String email, ShippingInfo shippingInfo){
+        UserEntity userEntity = userDAO.findByEmail(email);
         ShippingInfoEntity shippingInfoEntity = shippingInfo.toEntity();
         shippingInfoEntity.setUser(userEntity);
         userEntity.getShippingInfo().add(shippingInfoEntity);
-//        shippingInfoDAO.create(shippingInfoEntity);
         return new User(userDAO.merge(userEntity));
     }
     
