@@ -16,22 +16,22 @@ import ru.sstu.ushankashop.service.CartService;
  */
 @RestController
 @RequestMapping("cart")
-public class CartController {
+public class CartController extends BaseController{
     @Autowired
     CartService cartService;
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Cart addItemToCart(@RequestParam("itemId") Long itemId, @RequestParam("quantity") Integer quantity) {
-        return cartService.addItemToCart(itemId, quantity);
+        return cartService.addItemToCart(getPrincipal(), itemId, quantity);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     public Cart removeItemFromCart(@RequestParam("itemId") Long itemId) {
-        return cartService.removeItemFromCart(itemId);
+        return cartService.removeItemFromCart(getPrincipal(), itemId);
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public Cart getCart() {
-        return cartService.getCart();
+        return cartService.getCart(getPrincipal());
     }
 }

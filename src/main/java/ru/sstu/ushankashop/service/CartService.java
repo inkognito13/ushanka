@@ -24,8 +24,8 @@ public class CartService {
     ItemDAO itemDAO;
 
     @Transactional
-    public Cart addItemToCart(Long itemId, Integer quantity) {
-        UserEntity userEntity = userDAO.findById(1L);
+    public Cart addItemToCart(String userEmail, Long itemId, Integer quantity) {
+        UserEntity userEntity = userDAO.findByEmail(userEmail);
         CartEntity cart = userEntity.getCart();
         if (userEntity.getCart() == null) {
             cart = new CartEntity();
@@ -54,8 +54,8 @@ public class CartService {
     }
     
     @Transactional
-    public Cart removeItemFromCart(Long itemId) {
-        UserEntity userEntity = userDAO.findById(1L);
+    public Cart removeItemFromCart(String userEmail, Long itemId) {
+        UserEntity userEntity = userDAO.findByEmail(userEmail);
         CartEntity cart = userEntity.getCart();
         CommerceItemEntity toDelete = null;
         for (CommerceItemEntity commerceItemEntity:cart.getItems()){
@@ -70,8 +70,8 @@ public class CartService {
     }
     
     @Transactional
-    public Cart getCart() {
-        UserEntity userEntity = userDAO.findById(1L);
+    public Cart getCart(String userEmail) {
+        UserEntity userEntity = userDAO.findByEmail(userEmail);
         return new Cart(userEntity.getCart());
     }
 
